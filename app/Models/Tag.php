@@ -35,10 +35,10 @@ class Tag extends Model
     ];
 
     /**
-     * Получить задачу, которая принадлежит тегу.
+     * Теги, принадлежащие статусу.
      */
-    public function task()
+    public function tasks()
     {
-        return $this->belongsTo(Task::class);
+        return $this->belongsToMany(Task::class);
     }
 }

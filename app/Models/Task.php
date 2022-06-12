@@ -41,7 +41,8 @@ class Task extends Model
      */
     public function priorities()
     {
-        return $this->belongsToMany(Priority::class);
+        return $this->belongsToMany(Priority::class)
+            ->withTimestamps();
     }
 
     /**
@@ -49,15 +50,16 @@ class Task extends Model
      */
     public function statuses()
     {
-        return $this->belongsToMany(Status::class);
+        return $this->belongsToMany(Status::class)
+            ->withTimestamps();
     }
 
     /**
-     * Получить теги задачи.
+     * Теги, принадлежащие задаче.
      */
     public function tags()
     {
-        return $this->hasMany(Tag::class);
+        return $this->belongsToMany(Tag::class);
     }
 
     /*

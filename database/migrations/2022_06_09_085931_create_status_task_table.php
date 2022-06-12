@@ -14,17 +14,16 @@ class CreateStatusTaskTable extends Migration
     public function up()
     {
         Schema::create('status_task', function (Blueprint $table) {
-            $table->id();
             $table
                 ->foreignId('task_id')
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table
                 ->foreignId('status_id')
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
