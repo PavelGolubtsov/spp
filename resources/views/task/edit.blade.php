@@ -41,9 +41,9 @@
             </div>
 
             <div class="row mb-3">
-                <label class="col-md-2 col-form-label text-md-end">Выберите приоритет <span class="text-danger">*</span></label>
-                <div class="col-form-label mb-3">
-                    <select name="priority_id">
+            <label class="col-md-2 col-form-label text-md-end">Выберите приоритет <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <select class="form-control" name="priority_id">
                         @foreach ($priorities as $priority)
                             <option value="{{$priority->id}}">{{$priority->name}}</option>
                         @endforeach
@@ -52,14 +52,23 @@
             </div>
 
             <div class="row mb-3">
-                <label class="col-md-2 col-form-label text-md-end">Выберите статус <span class="text-danger">*</span></label>
-                <div class="col-form-label mb-3">
-                    <select name="status_id">
+            <label class="col-md-2 col-form-label text-md-end">Выберите статус <span class="text-danger">*</span></label>
+                <div class="col-md-6">
+                    <select class="form-control" name="status_id">
                         @foreach ($statuses as $status)
                             <option value="{{$status->id}}">{{$status->name}}</option>
                         @endforeach
                     </select>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>Теги</label>
+                <select class="select2" name="tag_id[]" multiple="multiple" data-placeholder="Выберите теги" style="width: 100%;">
+                    @foreach ($tags as $tag)
+                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="row mb-3">

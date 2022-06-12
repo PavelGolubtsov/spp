@@ -39,6 +39,7 @@
                         <th style="width: 20%">Название</th>
                         <th style="width: 20%">Приоритет</th>
                         <th style="width: 20%">Статус</th>
+                        <th style="width: 20%">Теги</th>
                         <th style="width: 20%"></th>
                     </tr>
                 </thead>
@@ -52,6 +53,11 @@
                         @foreach($tasks->find($order->task_id)->statuses as $status)
                             <td style="padding: 0 0 0 0.75rem;">{{$status->name}}</td>
                         @endforeach
+                        <td style="padding: 0 0 0 0.75rem;">
+                            @foreach($tasks->find($order->task_id)->tags as $tag)
+                                {{$tag->name}}
+                            @endforeach
+                        </td>
                         <td style="padding: 0 0.75rem 0 0.75rem;" class="project-actions text-right">
                             <a style="padding: 0.25rem 0.4rem;" class="btn btn-info btn-sm" href="{{ route('tasks.edit', $order->task_id) }}">
                                 <i class="fas fa-user-cog"></i>

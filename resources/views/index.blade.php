@@ -28,7 +28,9 @@
                         <li>Приоритет (низкий, средний, высокий)<br>
                             добавить: php artisan db:seed --class=PrioritySeeder
                         </li>
-                        <li>Один или несколько тегов</li>
+                        <li>Один или несколько тегов<br>
+                            добавить: php artisan db:seed --class=TagSeeder
+                        </li>
                         <li>Статус (в работе, завершена)<br>
                             добавить: php artisan db:seed --class=StatusSeeder
                         </li>

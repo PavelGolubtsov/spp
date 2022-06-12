@@ -59,26 +59,6 @@ class Task extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'tag_tasks', 'tasks_id', 'tag_id');
     }
-
-    /*
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($task) {
-            $task->{$task->getKeyName()} = (string) Str::uuid();
-        });
-    }
-
-    public function getIncrementing()
-    {
-        return false;
-    }
-
-    public function getKeyType()
-    {
-        return 'string';
-    }
-    */
 }

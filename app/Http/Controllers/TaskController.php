@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Priority;
 use App\Models\Status;
+use App\Models\Tag;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,8 +37,9 @@ class TaskController extends Controller
     public function create()
     {
         $priorities = Priority::get();
+        $tags = Tag::get();
 
-        return view('task.create', compact('priorities'));
+        return view('task.create', compact('priorities', 'tags'));
     }
 
     /**
@@ -51,11 +53,13 @@ class TaskController extends Controller
         $data = $request->validate([
             'name' => 'required|max:255',
             'priority_id' => 'required',
+            'tag_id' => 'required|array',
         ]);
 
         $task = Task::create($data);
         $task->priorities()->attach($data['priority_id']);
         $task->statuses()->attach(1);
+        $task->tags()->attach($data['tag_id']);
 
         return redirect()->back()->withSuccess('Задание создано!');
     }
@@ -81,8 +85,9 @@ class TaskController extends Controller
     {
         $priorities = Priority::get();
         $statuses = Status::get();
+        $tags = Tag::get();
 
-        return view('task.edit', compact('task', 'priorities', 'statuses'));
+        return view('task.edit', compact('task', 'priorities', 'statuses', 'tags'));
     }
 
     /**
@@ -98,15 +103,19 @@ class TaskController extends Controller
             'name' => 'required|max:255',
             'priority_id' => 'required',
             'status_id' => 'required',
+            'tag_id' => 'required|array',
         ]);
         
         $task->update($data);
         $task->priorities()->detach($data['priority_id']);
         $task->statuses()->detach($data['status_id']);
+        $task->tags()->detach($data['tag_id']);
         $task->priorities()->attach($data['priority_id']);
         $task->statuses()->attach($data['status_id']);
+        $task->tags()->attach($data['tag_id']);
         $task->priorities()->sync($data['priority_id']);
         $task->statuses()->sync($data['status_id']);
+        $task->tags()->sync($data['tag_id']);
 
         return redirect()->back()->withSuccess('Задание обновлено!');
     }

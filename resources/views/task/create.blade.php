@@ -51,6 +51,21 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label>Теги</label>
+            <select class="select2 @error('tag_id') is-invalid @enderror" name="tag_id[]" multiple="multiple" data-placeholder="Выберите теги" style="width: 100%;">
+                @foreach ($tags as $tag)
+                    <option {{ is_array( old('tag_id')) && in_array($tag->id, old('tag_id')) ? 'selected' : '' }} value="{{$tag->id}}">{{$tag->name}}</option>
+                @endforeach
+            </select>
+
+            @error('tag_id')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
         <div class="row mb-3">
             <label class="col-md-2 col-form-label text-md-end"></label>
             <div class="col-md-6 col-form-label">
