@@ -44,6 +44,49 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($tasks as $task)
+                    <tr>
+                        <td style="padding: 0 0 0 0.75rem;">{{$task->name}}</td>
+                        @foreach($task->priorities as $priority)
+                            <td style="padding: 0 0 0 0.75rem;">{{$priority->pivot->priority_id}}</td>
+                        @endforeach
+                        @foreach($task->statuses as $status)
+                            <td style="padding: 0 0 0 0.75rem;">{{$status->pivot->status_id}}</td>
+                        @endforeach
+                        <td style="padding: 0 0 0 0.75rem;">
+                            @foreach($task->tags as $tag)
+                                {{$tag->name}}
+                            @endforeach
+                        </td>
+                        <td style="padding: 0 0.75rem 0 0.75rem;" class="project-actions text-right">
+                            <a style="padding: 0.25rem 0.4rem;" class="btn btn-info btn-sm" href="{{ route('tasks.edit', $task->id) }}">
+                                <i class="fas fa-user-cog"></i>
+                            </a>
+                            <form style="padding: 0;" class="btn btn-sm" method="post" action="{{ route('tasks.destroy', $task->id) }}">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Default box -->
+        <div class="card">
+            <table class="table table-striped projects" style="margin: 0;">
+                <thead>
+                    <tr>
+                        <th style="width: 20%">Название</th>
+                        <th style="width: 20%">Приоритет</th>
+                        <th style="width: 20%">Статус</th>
+                        <th style="width: 20%">Теги</th>
+                        <th style="width: 20%"></th>
+                    </tr>
+                </thead>
+                <tbody>
                     @foreach($getOrder as $order)
                     <tr>
                         <td style="padding: 0 0 0 0.75rem;">{{$tasks->find($order->task_id)->name}}</td>

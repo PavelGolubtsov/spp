@@ -15,16 +15,15 @@ class CreateStatusTaskTable extends Migration
     {
         Schema::create('status_task', function (Blueprint $table) {
             $table
-                ->foreignId('task_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table
                 ->foreignId('status_id')
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->timestamps();
+            $table
+                ->foreignId('task_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
         });
     }
 

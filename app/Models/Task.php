@@ -12,11 +12,39 @@ class Task extends Model
     use HasFactory;
 
     /**
-     * The table associated with the model.
+     * Таблица базы данных, связанная с моделью.
      *
      * @var string
      */
     protected $table = 'tasks';
+
+    /**
+     * Соединение с базой данных, используемое моделью.
+     *
+     * @var string
+     */
+    protected $connection = 'mysql';
+
+    /**
+     * Первичный ключ, связанный с таблицей базы данных.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
+    //public $incrementing = false;
+
+    /**
+     * The data type of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    //protected $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
@@ -37,21 +65,23 @@ class Task extends Model
     ];
 
     /**
-     * Приоритеты, принадлежащие задаче.
-     */
-    public function priorities()
-    {
-        return $this->belongsToMany(Priority::class)
-            ->withTimestamps();
-    }
-
-    /**
      * Статусы, принадлежащие задаче.
      */
     public function statuses()
     {
-        return $this->belongsToMany(Status::class)
-            ->withTimestamps();
+        //return $this->belongsToMany(Status::class);
+        return $this->belongsToMany(Status::class, 'status_task', 'task_id', 'status_id');
+            //->wherePivotIn('status_id', [1, 2]);
+    }
+
+    /**
+     * Приоритеты, принадлежащие задаче.
+     */
+    public function priorities()
+    {
+        //return $this->belongsToMany(Priority::class);
+        return $this->belongsToMany(Priority::class, 'priority_task', 'task_id', 'priority_id');
+            //->orderBy('priority_id', 'ASC');
     }
 
     /**
@@ -59,6 +89,7 @@ class Task extends Model
      */
     public function tags()
     {
+        //return $this->belongsToMany(Tag::class);
         return $this->belongsToMany(Tag::class, 'tag_tasks', 'tasks_id', 'tag_id');
     }
 }

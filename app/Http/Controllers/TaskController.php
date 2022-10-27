@@ -18,15 +18,22 @@ class TaskController extends Controller
      */
     public function index()
     {
+        
+        $task = new Task();
+        $task = Task::get();
+        //$task = $task->statuses;
+        dd($task->statuses);
+        
+        //$tasks = Task::get();
+        /*
         $getOrder = DB::select(DB::raw(
-            'select * from priority_task inner join status_task
-            on priority_task.task_id = status_task.task_id
+            'select * from priority_task
+            inner join status_task on priority_task.task_id = status_task.task_id
             ORDER BY status_id ASC, priority_id ASC'
         ));
-
-        $tasks = Task::get();
-        
-        return view('task.index', compact('getOrder', 'tasks'));
+        */
+        //return view('task.index', compact('getOrder', 'tasks'));
+        return view('task.index', compact('task'));
     }
 
     /**

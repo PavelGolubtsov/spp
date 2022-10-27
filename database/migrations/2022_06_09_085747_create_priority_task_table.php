@@ -16,15 +16,10 @@ class CreatePriorityTaskTable extends Migration
         Schema::create('priority_task', function (Blueprint $table) {
             $table
                 ->foreignId('task_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->constrained();
             $table
                 ->foreignId('priority_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table->timestamps();
+                ->constrained();
         });
     }
 

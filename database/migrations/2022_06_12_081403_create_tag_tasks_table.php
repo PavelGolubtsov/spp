@@ -15,12 +15,12 @@ class CreateTagTasksTable extends Migration
     {
         Schema::create('tag_tasks', function (Blueprint $table) {
             $table
-                ->foreignId('tasks_id')
+                ->foreignId('tag_id')
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table
-                ->foreignId('tag_id')
+                ->foreignId('tasks_id')
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();

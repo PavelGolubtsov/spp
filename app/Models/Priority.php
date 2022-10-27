@@ -39,6 +39,6 @@ class Priority extends Model
      */
     public function tasks()
     {
-        return $this->belongsToMany(Task::class);
+        return $this->belongsToMany(Task::class, 'priority_task', 'priority_id', 'task_id');
     }
 }
